@@ -3,13 +3,26 @@ from .models import Article, Researchpaper
 from django.views.generic.list import ListView
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import ContactForm
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 
 # All Post View:
 def all_post(request):
-	posts = Researchpaper.objects.all()
+	posts_list = Researchpaper.objects.all()
 	unique_values = Researchpaper.objects.order_by().values('subject').distinct()
-	print(unique_values)
-	count = len(posts)
+	page = request.GET.get('page', 1)
+	count = len(posts_list)
+
+	paginator = Paginator(posts_list, 10)
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = paginator.page(paginator.num_pages)
+
 	return render(request, 'post/index.html', {'posts': posts, "count":count, "unique_values":unique_values})
 
 
@@ -23,7 +36,6 @@ def post_detail(request, id):
 def filter_post(request, subject):
 	# post = get_object_or_404(Researchpaper, id=id)
 	print('from filter function',subject)
-	# category = post.subject
 	results = Researchpaper.objects.filter(subject__exact= subject)
 	return render(request, 'post/filteredresult.html', {"posts": results,
 														"head_title":subject, "length":len(results)})
@@ -36,3 +48,24 @@ class TaskSearch(ListView):
 		query= self.request.GET.get('q')
 		object_list = Researchpaper.objects.filter (Q(subject__icontains=query) | Q(title__icontains=query) )
 		return object_list
+
+
+def contactView(request):
+	if request.method == 'GET':
+		form = ContactForm()
+	else:
+		form = ContactForm(request.POST)
+
+	if form.is_valid():
+		subject = form.cleaned_data['subject']
+		from_email = form.cleaned_data['from_email']
+		message = form.cleaned_data['message']
+		try:
+			send_mail(subject, message, from_email, ['admin@example.com'])
+		except BadHeaderError:
+			return HttpResponse('Invalid header found.')
+		return redirect('success')
+	return render(request, "post/email.html", {'form': form})
+
+def successView(request):
+	return HttpResponse('Success! Thank you for your message.')

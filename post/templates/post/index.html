@@ -73,21 +73,6 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<!-- Team -->
-<!--<nav>-->
-<!--    <div class="nav-wrapper brown darken-4">-->
-<!--    <div class="container">-->
-<!--    	 <a href="/" class="brand-logo">SerPaper</a>-->
-<!--	      <ul id="nav-mobile" class="right hide-on-med-and-down">-->
-<!--	        <li><a href="/">Home</a></li>-->
-<!--&lt;!&ndash;               <li><a href="/">Home</a></li>&ndash;&gt;-->
-<!--	      </ul>-->
-<!--    </div>-->
-<!--    </div>-->
-<!--  </nav>-->
-
 <style>
     .bottom_aligner {
     display: flex;
@@ -97,52 +82,67 @@
 .bottom_space {
     padding:10px;
 
+.title {
+font-size:40px;}
 
 </style>
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <h1><a class="navbar-brand" href="#">SerPaper</a></h1>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-    </ul>
-    <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="get">
-      <input class="form-control mr-sm-2" name='q' placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+    <div class="container">
+      <a class="navbar-brand" href="#">SerPaper</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">Research papers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="post.html">Sample Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 <div class="container pt-5">
 
-    <div class="dropdown show">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
+    <div class="row justify-content-between">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <p class="ml-2">Number of results:&nbsp;{{ count }}</p>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      {% for category in unique_values %}
-      <a class="dropdown-item" href="#">category</a>
-      {% endfor %}
-  </div>
+<!--            <label>List of categories<label>-->
+<!--            <select id="the-id">-->
+<!--                {% for category in unique_values %}-->
+<!--                <option value="{{ category }}">{{ category.subject }}</option>-->
+<!--                {% endfor %}-->
+<!--            </select>-->
+        </div>
+        <div class="mr-4">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="get">
+                <input class="form-control mr-sm-2" name='q' placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
 
-</div>
-
-        <div class="row bottom_space">
+    <div class="row bottom_space">
             {% for post in posts %}
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" >
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="image-flip">
                     <div class="mainflip flip-0">
                         <div class="frontside">
                             <div class="card h-100">
-                                <div class="card-body text-center">
+                                <div class="card-body text-center align-middle">
                                     <h5 class="card-title">{{ post.title }}</h5>
                                     <p class="card-text"><strong>Published by</strong>&nbsp;{{ post.author}} <br><br>&nbsp;{{ post.pub_date}}</p>
                                     <a href="/post/{{ post.id }}" class="btn btn-primary btn-sm justify-content-center"><i class="fa fa-plus"></i>Read more</a>
@@ -154,7 +154,15 @@
             </div>
             {% endfor %}
         </div>
+    <div class="d-flex justify-content-center mt-2 mb-5">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+    <span>Page&nbsp;{{ posts.number }}&nbsp;of&nbsp;{{ posts.paginator.num_pages }}</span>
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}">&nbsp;Next</a>
+    {% endif %}
     </div>
 </div>
-</section>
-<!-- Team -->
+
+
