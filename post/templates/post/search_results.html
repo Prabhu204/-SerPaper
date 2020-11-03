@@ -1,0 +1,28 @@
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container pt-5">
+    <h3>Articles</h3>
+    <div class="row">
+{% for article in object_list %}
+
+    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="card">
+  <h6 class="card-header">Title:&nbsp;{{ article.title}}</h6>
+  <div class="card-body">
+      <p class="card-text">Category:&nbsp;{{ article.subject }}</p>
+    <a href="/post/{{ post.id }}" class="btn btn-primary btn-sm float-right">Read more</a>
+  </div>
+</div>
+    </div>
+
+{% empty %}
+    <div>No articles yet.</div>
+{% endfor %}
+</div>
+</div>
