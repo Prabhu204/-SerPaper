@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 
 # All Post View:
 def all_post(request):
-	posts_list = Researchpaper.objects.all()
+	posts_list = Researchpaper.objects.order_by("title")
 	unique_values = Researchpaper.objects.order_by().values('subject').distinct()
 	page = request.GET.get('page', 1)
 	count = len(posts_list)
