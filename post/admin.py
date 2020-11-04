@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Article, Researchpaper, Subscription
+from . models import Article, Researchpaper, Subscription,Contact
 
 
 # Register the Article Model in the Admin Pannel
@@ -16,7 +16,14 @@ admin.site.register(Researchpaper, ResearchpaperAdmin)
 
 
 class SubscriptionAdmin(admin.ModelAdmin):
-    fields = ['email', 'created_at']
+    fields = ['email']
+    list_display = ('email', 'created_at')
 
 admin.site.register(Subscription, SubscriptionAdmin)
+
+class ContactAdmin(admin.ModelAdmin):
+    fields = ['email', 'subject','message']
+    readonly_fields = ('contacted_at',)
+    list_display = ('email', 'contacted_at')
+admin.site.register(Contact, ContactAdmin)
 

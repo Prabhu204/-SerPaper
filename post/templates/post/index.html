@@ -22,10 +22,10 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="research_papers">Research papers</a>
+            <a class="nav-link" href="/research_papers">Research papers</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact">Contact</a>
+            <a class="nav-link" href="/contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -33,5 +33,59 @@
   </nav>
 
  <h1>{{abc}}</h1>
+
+<!-- Footer -->
+<footer class="page-footer font-small bg-light pt-4">
+  <!-- Footer Elements -->
+  <div class="container">
+    <!--Grid row-->
+      <div class="row justify-content-center">
+      <div class="col-md-6 mb-4">
+        <form class="input-group" id="modalform" method="post">
+            {% csrf_token %}
+          <input type="text" class="form-control form-control-sm" placeholder="Your email" name='email'>
+          <div class="input-group-append">
+            <button id="btn-submit" class="btn btn-primary btn-sm justify-content-center" type="submit">subscribe for notification</button>
+          </div>
+        </form>
+      </div>
+      </div>
+
+    {% if messages %}
+      <div class="messages text-center">
+      {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
+      {{ message }}
+      </div>
+      {% endfor %}
+      </div>
+      {% endif %}
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="www.idea2aktion.com">idea2aktion</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script text="javascript">
+    setTimeout(fade_out, 3000);
+    function fade_out() {
+     e.preventDefault();
+        $(".messages").fadeOut().empty();
+    }
+    $(".post-form")[0].reset(); // this is to reset the form
+});
+
+</script>
 </body>
 </html>

@@ -120,6 +120,8 @@
             <span class="meta">Written by
               <a href="#">{{ post.author }}</a>
               {{ post.pub_date }}</span>
+            <br>
+            <p>Category:&nbsp;<a href="/post/{{ post.subject }}">{{ post.subject }}</a></p>
           </div>
         </div>
       </div>
@@ -129,19 +131,70 @@
   <!-- Post Content -->
   <article>
     <div class="container">
-      <div class="row">
+      <div class="row pb-3">
         <div class="col-lg-8 col-md-10 mx-auto">
 			<hr>
           <h2 class="section-heading">Abstract</h2>
 			<p>{{ post.abstract }}</p>
 			<hr>
 			<a href="{{post.pdf_url}}">Downloadble link</a>
-
         </div>
       </div>
     </div>
   </article>
+<!-- Footer -->
+<footer class="page-footer font-small bg-light pt-4">
+  <!-- Footer Elements -->
+  <div class="container">
+    <!--Grid row-->
+      <div class="row justify-content-center">
+      <div class="col-md-6 mb-4">
+        <form class="input-group" id="modalform" method="post">
+            {% csrf_token %}
+          <input type="text" class="form-control form-control-sm" placeholder="Your email" name='email'>
+          <div class="input-group-append">
+            <button id="btn-submit" class="btn btn-primary btn-sm justify-content-center" type="submit">subscribe for notification</button>
+          </div>
+        </form>
+      </div>
+      </div>
 
+    {% if messages %}
+      <div class="messages text-center">
+      {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
+      {{ message }}
+      </div>
+      {% endfor %}
+      </div>
+      {% endif %}
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="www.idea2aktion.com">idea2aktion</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script text="javascript">
+    setTimeout(fade_out, 3000);
+    function fade_out() {
+     e.preventDefault();
+        $(".messages").fadeOut().empty();
+    }
+    $(".post-form")[0].reset(); // this is to reset the form
+});
+
+</script>
 </body>
 </html>
 

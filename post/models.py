@@ -30,3 +30,13 @@ class Subscription(models.Model):
 
 	def __str__(self):
 		return self.email
+
+
+class Contact(models.Model):
+	email = models.CharField(max_length=100)
+	subject = models.CharField(max_length=100)
+	message = models.TextField(max_length=500)
+	contacted_at = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return self.email
