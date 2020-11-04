@@ -1,5 +1,99 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--</head>-->
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+<!--&lt;!&ndash; <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">&ndash;&gt;-->
+<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!--<head>-->
+
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">-->
+<!--    <div class="container">-->
+<!--      <a class="navbar-brand" href="/">SerPaper</a>-->
+<!--      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        Menu-->
+<!--        <i class="fas fa-bars"></i>-->
+<!--      </button>-->
+<!--      <div class="collapse navbar-collapse" id="navbarResponsive">-->
+<!--        <ul class="navbar-nav ml-auto">-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="/">Home</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="/research_papers">Research papers</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link" href="/contact">Contact</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </nav>-->
+
+<!-- <h1>{{abc}}</h1>-->
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer class="page-footer font-small bg-light pt-4">-->
+<!--  &lt;!&ndash; Footer Elements &ndash;&gt;-->
+<!--  <div class="container">-->
+<!--    &lt;!&ndash;Grid row&ndash;&gt;-->
+<!--      <div class="row justify-content-center">-->
+<!--      <div class="col-md-6 mb-4">-->
+<!--        <form class="input-group" id="modalform" method="post">-->
+<!--            {% csrf_token %}-->
+<!--          <input type="text" class="form-control form-control-sm" placeholder="Your email" name='email'>-->
+<!--          <div class="input-group-append">-->
+<!--            <button id="btn-submit" class="btn btn-primary btn-sm justify-content-center" type="submit">subscribe for notification</button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      </div>-->
+
+<!--    {% if messages %}-->
+<!--      <div class="messages text-center">-->
+<!--      {% for message in messages %}-->
+<!--      <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>-->
+<!--      {{ message }}-->
+<!--      </div>-->
+<!--      {% endfor %}-->
+<!--      </div>-->
+<!--      {% endif %}-->
+
+<!--  </div>-->
+<!--  &lt;!&ndash; Footer Elements &ndash;&gt;-->
+
+<!--  &lt;!&ndash; Copyright &ndash;&gt;-->
+<!--  <div class="footer-copyright text-center py-3">© 2020 Copyright:-->
+<!--    <a href="www.idea2aktion.com">idea2aktion</a>-->
+<!--  </div>-->
+<!--  &lt;!&ndash; Copyright &ndash;&gt;-->
+
+<!--</footer>-->
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<script-->
+<!--  src="https://code.jquery.com/jquery-3.4.1.min.js"-->
+<!--  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="-->
+<!--  crossorigin="anonymous"></script>-->
+
+<!--<script text="javascript">-->
+<!--    setTimeout(fade_out, 3000);-->
+<!--    function fade_out() {-->
+<!--     e.preventDefault();-->
+<!--        $(".messages").fadeOut().empty();-->
+<!--    }-->
+<!--    $(".post-form")[0].reset(); // this is to reset the form-->
+<!--});-->
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 </head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -7,11 +101,11 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
-
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="/">SerPaper</a>
+      <a class="navbar-brand" href="/" style="font-size:35px;">SerPaper</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -32,60 +126,38 @@
     </div>
   </nav>
 
- <h1>{{abc}}</h1>
+  <!-- Masthead -->
+  <header class="text-black text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto pt-5">
+          <h1 class="mb-5">
+            A repository of computer science Articles and get notified with my application</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+              </div>
+              <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-12 col-md-6 mx-auto pt-5 center">
+                <a href="/research_papers" class="btn btn-block btn-lg btn-primary">Find your research
+                papers</a>
 
-<!-- Footer -->
-<footer class="page-footer font-small bg-light pt-4">
-  <!-- Footer Elements -->
-  <div class="container">
-    <!--Grid row-->
-      <div class="row justify-content-center">
-      <div class="col-md-6 mb-4">
-        <form class="input-group" id="modalform" method="post">
-            {% csrf_token %}
-          <input type="text" class="form-control form-control-sm" placeholder="Your email" name='email'>
-          <div class="input-group-append">
-            <button id="btn-submit" class="btn btn-primary btn-sm justify-content-center" type="submit">subscribe for notification</button>
-          </div>
-        </form>
       </div>
-      </div>
+        </div>
 
-    {% if messages %}
-      <div class="messages text-center">
-      {% for message in messages %}
-      <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
-      {{ message }}
-      </div>
-      {% endfor %}
-      </div>
-      {% endif %}
 
-  </div>
-  <!-- Footer Elements -->
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="www.idea2aktion.com">idea2aktion</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-
-<script text="javascript">
-    setTimeout(fade_out, 3000);
-    function fade_out() {
-     e.preventDefault();
-        $(".messages").fadeOut().empty();
-    }
-    $(".post-form")[0].reset(); // this is to reset the form
-});
-
-</script>
+    </div>
+  </header>
 </body>
+
 </html>

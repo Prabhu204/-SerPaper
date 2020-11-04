@@ -88,7 +88,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="/">SerPaper</a>
+      <a class="navbar-brand" href="/" style="font-size:35px;">SerPaper</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -118,9 +118,8 @@
           <div class="post-heading mt-5">
             <h1>{{ post.title }}</h1>
             <span class="meta">Written by
-              <a href="#">{{ post.author }}</a>
-              {{ post.pub_date }}</span>
-            <br>
+              <a href="#">{{ post.author }}</a></span>
+              <p>{{ post.pub_date }}</p>
             <p>Category:&nbsp;<a href="/post/{{ post.subject }}">{{ post.subject }}</a></p>
           </div>
         </div>
