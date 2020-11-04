@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Article, Researchpaper
+from .models import Researchpaper, SubscribeModel
 from django.views.generic.list import ListView
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -7,9 +7,20 @@ from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+
+
+
+def index(request):
+	return render(request, 'post/index.html', {'abc':'abc'})
+
+
 
 # All Post View:
 def all_post(request):
+
 	posts_list = Researchpaper.objects.order_by("title")
 	unique_values = Researchpaper.objects.order_by().values('subject').distinct()
 	page = request.GET.get('page', 1)
@@ -23,7 +34,16 @@ def all_post(request):
 	except EmptyPage:
 		posts = paginator.page(paginator.num_pages)
 
-	return render(request, 'post/index.html', {'posts': posts, "count":count, "unique_values":unique_values})
+	if request.method == 'POST':
+		print(request.POST['email'])
+		value = request.POST['email']
+		try:
+			validate_email(value)
+		except ValidationError as e:
+			messages.error(request, 'Please enter valid email')
+		else:
+			messages.success(request, 'Your registration was successful')
+	return render(request, 'post/research_papers.html', {'posts': posts, "count":count, "unique_values":unique_values})
 
 
 # Post Detail View:
@@ -48,6 +68,7 @@ class TaskSearch(ListView):
 		query= self.request.GET.get('q')
 		object_list = Researchpaper.objects.filter (Q(subject__icontains=query) | Q(title__icontains=query) )
 		return object_list
+
 
 
 def contactView(request):

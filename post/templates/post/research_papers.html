@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+</head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">SerPaper</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Research papers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container pt-5">
+
+    <div class="row justify-content-between">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <p class="ml-2">Number of results:&nbsp;{{ count }}</p>
+
+        </div>
+        <div class="mr-4 ml-3">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="get">
+                <input class="form-control mr-sm-2" name='q' placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in posts|dictsort:"title.lower" %}
+    <tr>
+      <td>{{ post.title }}</td>
+      <td class="align-middle"><a href="/post/{{ post.id }}" class="btn btn-primary btn-sm justify-content-center"><i class="fa fa-plus"></i>Read more</a></td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+    <div class="d-flex justify-content-center mt-2 mb-5">
+    {% if posts.has_previous %}
+    <a href="?page={{ posts.previous_page_number }}">previous&nbsp;</a>
+    {% endif %}
+    <span>Page&nbsp;{{ posts.number }}&nbsp;of&nbsp;{{ posts.paginator.num_pages }}</span>
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}">&nbsp;next</a>
+    {% endif %}
+    </div>
+</div>
+<!-- Footer -->
+<footer class="page-footer font-small bg-light pt-4">
+  <!-- Footer Elements -->
+  <div class="container">
+    <!--Grid row-->
+      <div class="row justify-content-center">
+      <div class="col-md-6 mb-4">
+        <form class="input-group" id="modalform" method="post">
+            {% csrf_token %}
+          <input type="text" class="form-control form-control-sm" placeholder="Your email" name='email'>
+          <div class="input-group-append">
+            <button id="btn-submit" class="btn btn-primary btn-sm justify-content-center" type="submit">subscribe for notification</button>
+          </div>
+        </form>
+      </div>
+      </div>
+
+    {% if messages %}
+      <div class="messages text-center">
+      {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
+      {{ message }}
+      </div>
+      {% endfor %}
+      </div>
+      {% endif %}
+
+
+
+<!--    <div class="row">-->
+<!--      <div class="col-md-6 mb-4">-->
+<!--        &lt;!&ndash; Form &ndash;&gt;-->
+<!--        <form class="form-inline">-->
+<!--          <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"-->
+<!--            aria-label="Search">-->
+<!--          <i class="fas fa-search" aria-hidden="true"></i>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <div class="col-md-6 mb-4">-->
+<!--        <form class="input-group">-->
+<!--          <input type="text" class="form-control form-control-sm" placeholder="Your email"-->
+<!--            aria-label="Your email" aria-describedby="basic-addon2">-->
+<!--          <div class="input-group-append">-->
+<!--            <button class="btn btn-sm btn-outline-white my-0" type="button">Sign up</button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="www.idea2aktion.com">idea2aktion</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script text="javascript">
+    setTimeout(fade_out, 3000);
+    function fade_out() {
+     e.preventDefault();
+        $(".messages").fadeOut().empty();
+    }
+    $(".post-form")[0].reset(); // this is to reset the form
+});
+
+</script>
+
+
+</body>
+</html>
+
+
