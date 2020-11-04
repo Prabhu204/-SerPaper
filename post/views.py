@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Researchpaper, SubscribeModel
+from .models import Researchpaper,Subscription
 from django.views.generic.list import ListView
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -35,7 +35,6 @@ def all_post(request):
 		posts = paginator.page(paginator.num_pages)
 
 	if request.method == 'POST':
-		print(request.POST['email'])
 		value = request.POST['email']
 		try:
 			validate_email(value)
@@ -43,6 +42,9 @@ def all_post(request):
 			messages.error(request, 'Please enter valid email')
 		else:
 			messages.success(request, 'Your registration was successful')
+			email = Subscription.objects.create(email=value)
+			email.save()
+
 	return render(request, 'post/research_papers.html', {'posts': posts, "count":count, "unique_values":unique_values})
 
 

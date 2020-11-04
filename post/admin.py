@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Article, Researchpaper, SubscribeModel
+from . models import Article, Researchpaper, Subscription
 
 
 # Register the Article Model in the Admin Pannel
@@ -15,8 +15,8 @@ class ResearchpaperAdmin(admin.ModelAdmin):
 admin.site.register(Researchpaper, ResearchpaperAdmin)
 
 
-class SubscribeModelAdmin(admin.ModelAdmin):
-    fields = ['email', 'sys_id','status','created_date','updated_date']
+class SubscriptionAdmin(admin.ModelAdmin):
+    fields = ['email', 'created_at']
 
-admin.site.register(SubscribeModel, SubscribeModelAdmin)
+admin.site.register(Subscription, SubscriptionAdmin)
 
